@@ -1,0 +1,4 @@
+--class-path ./src/
+--library hlsdl
+--hl bin/wgpu.hl
+--main Main

@@ -1,3 +1,6 @@
 [submodule "wgpu-native"]
 	path = wgpu-native
 	url = git@github.com:gfx-rs/wgpu-native.git
+[submodule "SDL"]
+	path = SDL
+	url = git@github.com:libsdl-org/SDL.git

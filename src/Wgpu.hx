@@ -1,4 +1,4 @@
 package src;
 
-@:headerInclude("../../wgpu-native/ffi/wgpu.h")
-class Wgpu
+// @:include("../../wgpu-native/ffi/wgpu.h")
+// class Wgpu
