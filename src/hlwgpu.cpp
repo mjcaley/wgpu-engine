@@ -3,26 +3,30 @@
 #include <hl.h>
 #include <wgpu.h>
 #include "hlwgpu.hpp"
+#include <webgpu-headers/webgpu.h>
+#include "GLFW/glfw3.h"
 
 //HL_PRIM 
 
 hlwgpu::WGPUState::WGPUState()
 {
-	instance = wgpuCreateInstance(nullptr);
+	// instance = wgpuCreateInstance(nullptr);
 
-	WGPURequestAdapterOptions options;
-	wgpuInstanceRequestAdapter(
-		instance,
-		&options,
-		[](WGPURequestAdapterStatus status, WGPUAdapter adapter, char const* message, void* userdata) mutable {
-			if (status != WGPURequestAdapterStatus_Success) {
-				throw "An exception";
-			}
+	// WGPURequestAdapterOptions options;
+	// wgpuInstanceRequestAdapter(
+	// 	NULL,
+	// 	&options,
+	// 	[](WGPURequestAdapterStatus status, WGPUAdapter adapter, char const* message, void* userdata) mutable {
+	// 		if (status != WGPURequestAdapterStatus_Success) {
+	// 			throw "An exception";
+	// 		}
 
-			auto* state = static_cast<WGPUState*>(userdata);
-			state->adapter = adapter;
-		},
-		this);
+	// 		auto* state = static_cast<WGPUState*>(userdata);
+	// 		state->adapter = adapter;
+	// 	},
+	// 	this);
+
+	
 	
 	// SDL_SysWMinfo windowInfo;
 	// SDL_GetWindowWMInfo(window, &windowInfo);
@@ -43,8 +47,8 @@ hlwgpu::WGPUState::WGPUState()
 
 hlwgpu::WGPUState::~WGPUState()
 {
-	wgpuDeviceRelease(device);
-	wgpuInstanceRelease(instance);
+	// wgpuDeviceRelease(device);
+	// wgpuInstanceRelease(instance);
 }
 
 void hlwgpu::adapterRequestCallback(WGPURequestAdapterStatus status, WGPUAdapter adapter, char const* message, void* userdata)
@@ -55,13 +59,4 @@ void hlwgpu::adapterRequestCallback(WGPURequestAdapterStatus status, WGPUAdapter
 
 	auto* state = static_cast<WGPUState*>(userdata);
 	state->adapter = adapter;
-}
-
-int main() {
-    if (!glfwInit())
-    {
-        return 1;
-    }
-
-    glfwTerminate();
 }
