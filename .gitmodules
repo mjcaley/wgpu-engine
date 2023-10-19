@@ -1,6 +1,9 @@
 [submodule "wgpu-native"]
-	path = wgpu-native
+	path = subprojects/wgpu-native
 	url = git@github.com:gfx-rs/wgpu-native.git
-[submodule "SDL"]
-	path = SDL
-	url = git@github.com:libsdl-org/SDL.git
+[submodule "glfw"]
+	path = subprojects/glfw
+	url = git@github.com:glfw/glfw.git
+[submodule "subprojects/hashlink"]
+	path = subprojects/hashlink
+	url = git@github.com:HaxeFoundation/hashlink.git
