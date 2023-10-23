@@ -1,5 +1,6 @@
 #define HL_NAME(n) hlwgpu_##n
 
+#include <iostream>
 #include <hl.h>
 #include <wgpu.h>
 #include "hlwgpu.hpp"
@@ -51,6 +52,11 @@ hlwgpu::WGPUState::~WGPUState()
 	// wgpuInstanceRelease(instance);
 }
 
+void hlwgpu::error_callback(int error, const char* description)
+{
+    std::cout << "Error: " << description << std::endl;
+}
+
 void hlwgpu::adapterRequestCallback(WGPURequestAdapterStatus status, WGPUAdapter adapter, char const* message, void* userdata)
 {
 	if (status != WGPURequestAdapterStatus_Success) {
@@ -59,4 +65,34 @@ void hlwgpu::adapterRequestCallback(WGPURequestAdapterStatus status, WGPUAdapter
 
 	auto* state = static_cast<WGPUState*>(userdata);
 	state->adapter = adapter;
+}
+
+int hlwgpu::run() {
+    glfwSetErrorCallback(hlwgpu::error_callback);
+    if (!glfwInit())
+    {
+        std::cout << "GLFW failed init" << std::endl;
+        return 1;
+    }
+
+    GLFWwindow* window = glfwCreateWindow(640, 480, "My Title", NULL, NULL);
+    if (!window)
+    {
+        std::cout << "GLFW failed create window" << std::endl;
+    }
+
+    std::cout << "GLFW success init" << std::endl;
+
+    std::cout << "WGPU state setup" << std::endl;
+
+    auto wgpuState = hlwgpu::WGPUState();
+
+    while (true)
+    {
+
+    }
+
+    glfwTerminate();
+
+    return 0;
 }
